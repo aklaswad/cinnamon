@@ -1,6 +1,5 @@
 requires 'AnyEvent';
 requires 'Class::Load';
-requires 'Coro';
 requires 'Getopt::Long';
 requires 'IPC::Run';
 requires 'Log::Dispatch';

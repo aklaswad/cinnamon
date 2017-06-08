@@ -56,7 +56,6 @@
          "requires" : {
             "AnyEvent" : "0",
             "Class::Load" : "0",
-            "Coro" : "0",
             "Getopt::Long" : "0",
             "Hash::MultiValue" : "0",
             "IPC::Run" : "0",

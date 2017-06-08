@@ -159,9 +159,9 @@ sub get_param {
     return $value;
 }
 
-# Thread-specific stash
+my $stash;
 sub stash {
-    my $stash = $Coro::current->{Cinnamon} ||= {};
+    $stash ||= {};
 }
 
 sub call_task {

@@ -5,9 +5,6 @@ use warnings;
 use Cinnamon qw(CTX);
 use Cinnamon::Logger;
 
-use Coro;
-use Coro::Select;
-
 sub start {
     my ($class, $hosts, $task) = @_;
     my $all_results = {};
@@ -18,18 +15,10 @@ sub start {
     my $concurrency         = $concurrency_setting->{$task_name} || scalar @$hosts;
 
     while (my @target_hosts = splice @$hosts, 0, $concurrency) {
-        my @coros;
-
         for my $host (@target_hosts) {
-            my $coro = async {
-                my $result = $class->execute($host, $task);
-                $all_results->{$host} = $result;
-            };
-
-            push @coros, $coro;
+            my $result = $class->execute($host, $task);
+            $all_results->{$host} = $result;
         }
-
-        $_->join for @coros;
     }
 
     return $all_results;
